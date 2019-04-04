@@ -1,4 +1,4 @@
 .ipynb_checkpoints/
 .idea/
-.npy
-.pt
+*.npy
+*.pt
