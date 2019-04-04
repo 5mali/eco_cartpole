@@ -1,0 +1,1 @@
+eco_cartpole_original: GRANULARITY = 50, 200ND x 5EP, T_EPS = 0.98, BIAS = 0.5, NN_ITER=7000, 
