@@ -1,0 +1,3 @@
+cartpole_v0-custom_x  : TIMESTEP_LIMIT = 200, SEGREGATION = 20, RL = Dueling Double DQN, NOISE = [masscart, masspole, length], N_STATES = 7, MEMORY = 5000, LEARNING_ITERATIONS = 5000
+cartpole_v0-custom    : TIMESTEP_LIMIT = 200, SEGREGATION = 20, RL = Dueling Double DQN, NOISE = [masscart, masspole, length], N_STATES = 4, MEMORY = 5000, LEARNING_ITERATIONS = 5000
+cartpole_v0-original  : TIMESTEP_LIMIT = 200, SEGREGATION = 16, RL = Dueling Double DQN
