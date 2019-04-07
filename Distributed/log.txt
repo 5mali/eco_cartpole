@@ -1,10 +1,20 @@
+CHECKPOINT 1:
+    20 Nodes x 200episodes
+    POLE LENGTH = 0.5 +/- 0.3
+    Dueling Double DQN
+    MEMORY = 100000 + 100000
+    NO Tabular Learning
+    GRANULARITY = 30 , 15
+    
 eco_cartpole_1xtra_v1:
     STRIPING AT ACTOR
     
 eco_cartpole_1xtra:
-    using only one extra feature - length.
+    NODES: 10
+    EPISODES : 200
+    using only one extra feaeco_cartpole_1xtra-Copy1ture - length.
     LO_GRAIN = 10
-    HI_GRAIN = 50
+    HI_GRAIN = 30
     STATE_SIZE = 50^4 *10 = 62,500,000
     STRIPING AT LEARNER
 
