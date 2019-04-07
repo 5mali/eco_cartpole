@@ -1,6 +1,11 @@
+ECO_B:
+    LEARNING AT ACTOR
+    
 BASE_A: Only NN. NO extra features
 
 LONE_A: Only NN - no distributed learning. Using only a single D3QN agent
+
+ECO_0A: No striping
 
 ECO_A:
     CHECKPOINT 1 
