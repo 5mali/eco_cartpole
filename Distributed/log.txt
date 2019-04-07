@@ -1,4 +1,4 @@
-CHECKPOINT 1:
+CHECKPOINT 1: eco_cartpole_1xtra:
     20 Nodes x 200episodes
     POLE LENGTH = 0.5 +/- 0.3
     Dueling Double DQN

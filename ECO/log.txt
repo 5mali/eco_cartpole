@@ -1,0 +1,13 @@
+BASE_A: Only NN. NO extra features
+
+LONE_A: Only NN - no distributed learning. Using only a single D3QN agent
+
+ECO_A:
+    CHECKPOINT 1 
+    20 Nodes x 200episodes
+    POLE LENGTH = 0.5 +/- 0.3
+    Dueling Double DQN
+    MEMORY = 100000 + 100000
+    NO Tabular Learning
+    GRANULARITY = 30 , 15
+    
