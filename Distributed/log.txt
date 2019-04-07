@@ -1,3 +1,12 @@
+eco_cartpole_1xtra_v1:
+    STRIPING AT ACTOR
+    
+eco_cartpole_1xtra:
+    using only one extra feature - length.
+    LO_GRAIN = 10
+    HI_GRAIN = 50
+    STATE_SIZE = 50^4 *10 = 62,500,000
+    STRIPING AT LEARNER
 
 eco_cartpole_custom_3xtra_v1-COPY1
     2 nodes X 500 episodes
