@@ -1,1 +1,30 @@
-eco_cartpole_original: GRANULARITY = 50, 200ND x 5EP, T_EPS = 0.98, BIAS = 0.5, NN_ITER=7000, 
+
+eco_cartpole_custom_3xtra_v1-COPY1
+    2 nodes X 500 episodes
+
+eco_cartpole_custom_3xtra_v1
+    10 nodes X 100 episodes
+    WIDER ABSOLUTE MAXIMUM/MINIMUM values for XTRA features
+    Added three extra features: masscart, masspole, length
+    D3QN
+    Striped Q-tables
+    Two layers of granularity: 20 and 10
+    STATE_SIZE = 20^4 * 10^3 = 160,000,000
+    Quantization perfromed by Learner
+                                 
+eco_cartpole_custom_3xtra
+    Added three extra features: masscart, masspole, length
+    D3QN
+    Striped Q-tables
+    Two layers of granularity: 20 and 10
+    STATE_SIZE = 20^4 * 10^3 = 160,000,000
+    Quantization perfromed by Learner
+                             
+eco_cartpole_original_mod    
+    GRANULARITY = 50, T_EPS = 0.98, BIAS = 0.5, NN_ITER=7000, DDQN, 
+    Non-striped Q-tables
+    STATE_SIZE = 50^4 = 6,250,000
+    better function definitions for discretize()
+                             
+eco_cartpole_original
+    GRANULARITY = 50, T_EPS = 0.98, BIAS = 0.5, NN_ITER=7000, DDQN, Non-striped Q-tables
