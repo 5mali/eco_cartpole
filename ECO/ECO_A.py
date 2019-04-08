@@ -495,7 +495,8 @@ while iteration < MAX_NO_OF_ITERATIONS:
     
     if node_min_time.min() > 195:
 #         print("Problem SOLVED in iteration#", iteration)
-        break
+         final_result = "SUCCESS"
+         break
 
     # SEGREGATE AND STORE EXPERIENCES
     ##################################################################
@@ -649,4 +650,4 @@ if iteration == MAX_NO_OF_ITERATIONS:
 #     print("FAILED :(")
     final_result = "FAILURE"
     
-print("{:6d} {} {:3d} {:7d} {:10d} {:10.2f}".format(seed, final_result, int(iteration), int(total_parallel_timesteps), int(total_serial_timesteps), total_serial_timesteps/total_parallel_timesteps))
+print("{:6d} {} {:3d} {:4d} {:7d} {:10d} {:10.2f}".format(seed, final_result, int(node_min_time.min()), int(iteration), int(total_parallel_timesteps), int(total_serial_timesteps), total_serial_timesteps/total_parallel_timesteps))
