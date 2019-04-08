@@ -1,4 +1,8 @@
-    ECO_B1 : Learning at Actor XX
+    ECO_C2: No striping
+ECO_C: Reduced Granularity, Predetermined striping
+
+    ECO_B2: No striping
+    ECO_B1 : Learning at Actor XX[scehduling used]
 ECO_B: CHECKPOINT
 
 ECO_A_v2:
