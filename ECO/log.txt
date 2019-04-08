@@ -4,6 +4,12 @@ ECO_A_v2:
     
 ECO_B:
     STRIPING AT ACTOR
+    LEARNING AT ACTOR
+    T_GAMMA = 0.95
+    NN_GAMMA = 0.9
+    MAX_NN_ITERATIONS = 7000
+    T_EPSILON is low for first 3 iterations
+    Changed POLE_VEL_ABS_MAX to +/- 6
     
 BASE_A: Only NN. NO extra features
 
