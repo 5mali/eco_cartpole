@@ -70,8 +70,8 @@ T_LR           = 1e-1
 T_GAMMA        = 0.95
 T_EPSILON      = 0.98
 
-NO_OF_NODES    = 100
-NO_OF_EPISODES = 40
+NO_OF_NODES    = 20
+NO_OF_EPISODES = 2
 TIMESTEP_LIMIT = 200
 
 
