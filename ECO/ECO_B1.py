@@ -4,7 +4,7 @@
 # In[1]:
 
 
-get_ipython().run_line_magic('matplotlib', 'inline')
+# get_ipython().run_line_magic('matplotlib', 'inline')
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -21,9 +21,9 @@ import itertools
 # In[2]:
 
 
-import matplotlib.pyplot as plt
-import timeit
-get_ipython().run_line_magic('load_ext', 'memory_profiler')
+# import matplotlib.pyplot as plt
+# import timeit
+# get_ipython().run_line_magic('load_ext', 'memory_profiler')
 
 
 # In[3]:
@@ -52,9 +52,9 @@ ENV_A_SHAPE = 0 if isinstance(env.action_space.sample(), int) else env.action_sp
 
 
 RNDM_STRING = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + datetime.now().strftime("_%H_%M_%S")
-print("ID: ",RNDM_STRING)
+# print("ID: ",RNDM_STRING)
 MODEL_FILENAME = './models/'+ RNDM_STRING + "_NN" + ".pt"
-print("NN-MODEL FILENAME: ", MODEL_FILENAME)
+# print("NN-MODEL FILENAME: ", MODEL_FILENAME)
 
 
 # In[6]:
@@ -100,8 +100,8 @@ NO_OF_NODES    = 10
 NO_OF_EPISODES = 100
 TIMESTEP_LIMIT = 200
 
-print("Number of NODES: ", NO_OF_NODES)
-print("Number of EPISODES per NODE", NO_OF_EPISODES)
+# print("Number of NODES: ", NO_OF_NODES)
+# print("Number of EPISODES per NODE", NO_OF_EPISODES)
 
 
 # In[9]:
@@ -122,7 +122,7 @@ MIN_MEMORY_CAP      = 100000
 
 MAX_NO_OF_ITERATIONS = 30
 MAX_NN_ITERATIONS    = 7000
-print("Number of ITERATIONS: ",MAX_NO_OF_ITERATIONS)
+# print("Number of ITERATIONS: ",MAX_NO_OF_ITERATIONS)
 
 
 # In[11]:
@@ -272,8 +272,8 @@ LENGTH_ABS_MIN = 0.375
 # SET GRANULARITY
 HI_GRAIN = 40
 LO_GRAIN = 10
-print("HI_GRAIN = ", HI_GRAIN)
-print("LO_GRAIN = ", LO_GRAIN)
+# print("HI_GRAIN = ", HI_GRAIN)
+# print("LO_GRAIN = ", LO_GRAIN)
 
 
 # In[15]:
@@ -334,7 +334,8 @@ def mp_node_run(node_id, boundary, iteration):
 
     exp_rec      = np.empty(N_STATES * 2 + 2)
     
-    if iteration < 3:
+    if iteration < 3:# get_ipython().run_line_magic('load_ext', 'memory_profiler')
+
         my_EPSILON   = (iteration+1) * 0.2 + np.random.uniform(-0.1,0.1)
     else:
         my_EPSILON   = T_EPSILON + np.random.uniform(-0.01,0.01)
@@ -384,15 +385,15 @@ def mp_node_run(node_id, boundary, iteration):
                 next_state = tuple(discretize(s_, borders))
 
                 # learn
-                my_Q_TABLE[this_state][a] = my_Q_TABLE[this_state][a] + my_LR * (r + T_GAMMA * my_Q_TABLE[next_state].max() - my_Q_TABLE[this_state][a])
+#                 my_Q_TABLE[this_state][a] = my_Q_TABLE[this_state][a] + my_LR * (r + T_GAMMA * my_Q_TABLE[next_state].max() - my_Q_TABLE[this_state][a])
                 
-                if done or time_steps >= TIMESTEP_LIMIT:
+                if done:
                     time_rec[i_episode] = time_steps
                     break
                 s = s_
 
             i_episode += 1
-        if i_episode >= NO_OF_EPISODES:
+        if i_episode >= NO_OF_EPISODES:TIMESTEP_LIMIT
             i_episode = 0
             break
 
@@ -503,10 +504,10 @@ while iteration < MAX_NO_OF_ITERATIONS:
     else:
         node_EPSILON   = T_EPSILON
     
-    print("\n")
-    print("ITERATION #", iteration)
-    print("MEAN TABULAR EPSILON = ", node_EPSILON)
-    print("TABULAR LR      = ", T_LR)
+#     print("\n")
+#     print("ITERATION #", iteration)
+#     print("MEAN TABULAR EPSILON = ", node_EPSILON)
+#     print("TABULAR LR      = ", T_LR)
 
     tic = datetime.now()
     
@@ -530,31 +531,31 @@ while iteration < MAX_NO_OF_ITERATIONS:
     total_serial_timesteps   += node_time_rec.sum()
     EXP_GEN = node_time_rec.sum().astype(int)
 
-    print("SMALLEST TIMESTEP in ITERATION {:d}: {:d}".format(iteration, node_time_rec.min().astype(int)))
-    print("REAL TIME TO GENERATE {:d} EXPERIENCES:{}".format(EXP_GEN, (datetime.now()-tic)))
+#     print("SMALLEST TIMESTEP in ITERATION {:d}: {:d}".format(iteration, node_time_rec.min().astype(int)))
+#     print("REAL TIME TO GENERATE {:d} EXPERIENCES:{}".format(EXP_GEN, (datetime.now()-tic)))
     ##################################################################
 
-    # PLOT EXPERIENCES
-    ##################################################################
-    node_avg_time = node_time_rec.mean(axis=1)
-    node_std_time = node_time_rec.std(axis=1)
-    node_max_time = node_time_rec.max(axis=1)
-    node_min_time = node_time_rec.min(axis=1)
+#     # PLOT EXPERIENCES
+#     ##################################################################
+#     node_avg_time = node_time_rec.mean(axis=1)
+#     node_std_time = node_time_rec.std(axis=1)
+#     node_max_time = node_time_rec.max(axis=1)
+#     node_min_time = node_time_rec.min(axis=1)
 
-    fig = plt.figure(figsize = (15,3))
-    ax2 = fig.add_subplot(1, 1, 1)
-    ax2.set_title("Q-table Performance")
-    ax2.bar(range(NO_OF_NODES) , node_max_time, alpha = 0.1, color = 'r', edgecolor = 'black', capsize=7 )
-    ax2.bar(range(NO_OF_NODES) , node_avg_time, alpha = 0.5, color = 'g', edgecolor = 'black', capsize=7 )
-    ax2.bar(range(NO_OF_NODES) , node_min_time, alpha = 0.4, color = 'r', edgecolor = 'black', capsize=7 )
+#     fig = plt.figure(figsize = (15,3))
+#     ax2 = fig.add_subplot(1, 1, 1)
+#     ax2.set_title("Q-table Performance")
+#     ax2.bar(range(NO_OF_NODES) , node_max_time, alpha = 0.1, color = 'r', edgecolor = 'black', capsize=7 )
+#     ax2.bar(range(NO_OF_NODES) , node_avg_time, alpha = 0.5, color = 'g', edgecolor = 'black', capsize=7 )
+#     ax2.bar(range(NO_OF_NODES) , node_min_time, alpha = 0.4, color = 'r', edgecolor = 'black', capsize=7 )
 
-    ax2.plot(np.ones_like(node_avg_time)*200, 'g--')
-    ax2.set_ylabel('Mean Node Lifetime',color = 'g')
-    ax2.set_ylim(0,TIMESTEP_LIMIT+10)
-    fig.tight_layout()
-    ax2.grid()
-    plt.show()
-    ##################################################################
+#     ax2.plot(np.ones_like(node_avg_time)*200, 'g--')
+#     ax2.set_ylabel('Mean Node Lifetime',color = 'g')
+#     ax2.set_ylim(0,TIMESTEP_LIMIT+10)
+#     fig.tight_layout()
+#     ax2.grid()
+#     plt.show()
+#     ##################################################################
     
     if node_min_time.min() > 195:
         final_result = "SUCCESS"
@@ -577,8 +578,8 @@ while iteration < MAX_NO_OF_ITERATIONS:
 
     NN_ITERATIONS = MAX_NN_ITERATIONS
 
-    print("GOOD MEMORY COUNTER: ", min(MIN_MEMORY_CAP, dqn.good_memory_counter))
-    print("BAD MEMORY COUNTER: ", min(MIN_MEMORY_CAP, dqn.bad_memory_counter))
+#     print("GOOD MEMORY COUNTER: ", min(MIN_MEMORY_CAP, dqn.good_memory_counter))
+#     print("BAD MEMORY COUNTER: ", min(MIN_MEMORY_CAP, dqn.bad_memory_counter))
     ##################################################################
 
     # LEARN
@@ -587,15 +588,15 @@ while iteration < MAX_NO_OF_ITERATIONS:
         NN_LR = 1e-4
     else:
         NN_LR = 1e-3
-    print("Training Neural Network for", NN_ITERATIONS, "iterations", "@ LR = ", NN_LR)
-    print(int(BATCH_SIZE*TERMINAL_BIAS),"TERMINAL EXPERIENCES IN A BATCH SIZE OF",BATCH_SIZE)
+#     print("Training Neural Network for", NN_ITERATIONS, "iterations", "@ LR = ", NN_LR)
+#     print(int(BATCH_SIZE*TERMINAL_BIAS),"TERMINAL EXPERIENCES IN A BATCH SIZE OF",BATCH_SIZE)
     tic=datetime.now()
     nn_level_up_metric = 0
     for nn_iter in range(NN_ITERATIONS):
         dqn.learn()
         #validate by running for TIMESTEP_LIMIT iterations
         if(nn_iter%int(NN_ITERATIONS/5) == int(NN_ITERATIONS/5)-1):
-            print("Validating... ",end="")
+#             print("Validating... ",end="")
             time_rec = []
             v_env.length   = np.random.uniform(LENGTH_ABS_MIN, LENGTH_ABS_MAX)
             v_xtra = [v_env.length]
@@ -615,12 +616,12 @@ while iteration < MAX_NO_OF_ITERATIONS:
                     s = s_
                 time_rec = np.append(time_rec, time_step)
             mean_time = time_rec.mean()
-            print("MEAN TIME: ", mean_time)
+#             print("MEAN TIME: ", mean_time)
             if mean_time >= nn_level_up_metric:
                 nn_level_up_metric = mean_time
                 torch.save(dqn.eval_net.state_dict(), MODEL_FILENAME)
 
-    print("TRAINING TIME:{}".format(datetime.now()-tic))
+#     print("TRAINING TIME:{}".format(datetime.now()-tic))
     ##################################################################
 
     # CHECK PERFORMANCE OF THE BEST MODEL
@@ -629,50 +630,50 @@ while iteration < MAX_NO_OF_ITERATIONS:
     best_dqn.eval_net.load_state_dict(torch.load(MODEL_FILENAME))
     best_dqn.eval_net.eval()
 
-    time_rec = []
-    for i_episode in range(TIMESTEP_LIMIT):
-        env.length   = np.random.uniform(LENGTH_ABS_MIN, LENGTH_ABS_MAX)
-        Xtra = [env.length]
-        time_step = 0
-        s = env.reset()
-        s = np.append(s, Xtra)
+#     time_rec = []
+#     for i_episode in range(TIMESTEP_LIMIT):
+#         env.length   = np.random.uniform(LENGTH_ABS_MIN, LENGTH_ABS_MAX)
+#         Xtra = [env.length]
+#         time_step = 0
+#         s = env.reset()
+#         s = np.append(s, Xtra)
 
-        while True:
-    #         env.render()
-            time_step += 1 
-            a = best_dqn.choose_greedy_action(s)
-            s_, r, done, info = env.step(a)
-            s_ = np.append(s_, Xtra)
-            if done:
-                break
-            s = s_
-        time_rec = np.append(time_rec, time_step)
+#         while True:
+#     #         env.render()
+#             time_step += 1 
+#             a = best_dqn.choose_greedy_action(s)
+#             s_, r, done, info = env.step(a)
+#             s_ = np.append(s_, Xtra)
+#             if done:
+#                 break
+#             s = s_
+#         time_rec = np.append(time_rec, time_step)
 
-    fig = plt.figure(figsize = (15,3))
-    ax2 = fig.add_subplot(1, 1, 1)
-    data = time_rec
-    ax2.plot(data, color = 'm')
-    ax2.plot(np.ones_like(data)*200, 'm--')
-    ax2.set_title('Neural Network Performance using BEST MODEL ')
-    ax2.set_ylabel('Time Steps',color = 'm')
-    ax2.set_ylim(0,TIMESTEP_LIMIT+10)
-    fig.tight_layout()
-    ax2.grid()
-    plt.show()
-    ##################################################################
+#     fig = plt.figure(figsize = (15,3))
+#     ax2 = fig.add_subplot(1, 1, 1)
+#     data = time_rec
+#     ax2.plot(data, color = 'm')
+#     ax2.plot(np.ones_like(data)*200, 'm--')
+#     ax2.set_title('Neural Network Performance using BEST MODEL ')
+#     ax2.set_ylabel('Time Steps',color = 'm')
+#     ax2.set_ylim(0,TIMESTEP_LIMIT+10)
+#     fig.tight_layout()
+#     ax2.grid()
+#     plt.show()
+#     ##################################################################
     
     # CREATE INDIVIDUALIZED Q-TABLES FOR THE NODES
     ##################################################################
-    start = timeit.default_timer()
+#     start = timeit.default_timer()
     for node_id in range(NO_OF_NODES):
 #         # SET STATE VALUE BORDERS AS REQUESTED BY THE NODE
 #         ###############################################
         [C_POS_MAX, C_VEL_MAX, P_ANG_MAX, P_VEL_MAX, LENGTH_MAX,
          C_POS_MIN, C_VEL_MIN, P_ANG_MIN, P_VEL_MIN, LENGTH_MIN]  = node_boundaries[node_id]
 #         ###############################################
-        print(node_id,'-max-',node_boundaries[node_id][:N_STATES])
-        print(node_id,'-min-',node_boundaries[node_id][N_STATES:])
-        print("")
+#         print(node_id,'-max-',node_boundaries[node_id][:N_STATES])
+#         print(node_id,'-min-',node_boundaries[node_id][N_STATES:])
+#         print("")
         
         node_boundaries[node_id] = [C_POS_ABS_MAX, C_VEL_ABS_MAX, P_ANG_ABS_MAX, P_VEL_ABS_MAX, LENGTH_MAX,
                                     C_POS_ABS_MIN, C_VEL_ABS_MIN, P_ANG_ABS_MIN, P_VEL_ABS_MIN, LENGTH_MIN]
@@ -701,9 +702,9 @@ pool.join()
 # In[ ]:
 
 
-print("Total Parallel Timesteps : ", total_parallel_timesteps)
-print("Total Serial Timesteps   : ", total_serial_timesteps)
-print("Speed-up                 :  {:6.2f}".format(total_serial_timesteps/total_parallel_timesteps))
+# print("Total Parallel Timesteps : ", total_parallel_timesteps)
+# print("Total Serial Timesteps   : ", total_serial_timesteps)
+# print("Speed-up                 :  {:6.2f}".format(total_serial_timesteps/total_parallel_timesteps))
 
 
 # In[ ]:
