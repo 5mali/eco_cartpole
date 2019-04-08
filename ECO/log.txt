@@ -1,4 +1,4 @@
-    ECO_B1 : With learning @ ACTOR
+    ECO_B1 : Learning at Actor XX
 ECO_B: CHECKPOINT
 
 ECO_A_v2:
